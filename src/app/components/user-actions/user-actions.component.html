@@ -1,0 +1,22 @@
+<br>
+<div class="row">
+  <div class="col-sm-8">
+    <button class="btn btn-primary" (click)="obtainUsers()">Get Users</button>
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <div class="alert alert-success" role="alert">
+      <h5 class="alert-heading">Objects from DB</h5>
+      <div *ngFor="let object of obijects">
+        <pre> {{ object | json }} </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

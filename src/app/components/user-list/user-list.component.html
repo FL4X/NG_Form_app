@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-sm-8">
+    <br>
+    <h4>User Creation</h4>
+    <hr>
+    <form action="http://model-driven-app.firebaseio.com/" target="_blank" method="POST" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)">
+      <div>
+
+        <div class="form-group">
+          <label for="id">Unique ID</label>
+          <input type="number"
+                 class="form-control"
+                 id="id"
+                 formControlName="id">
+        </div>
+
+        <div class="form-group">
+          <label for="companyId">Companie's ID</label>
+          <input type="number"
+                 class="form-control"
+                 id="companyId"
+                 formControlName="companyId">
+          <small [hidden]="myForm.controls.companyId.valid || (myForm.controls.companyId.pristine && !submitted)">
+            'Companie's ID' is required (unique in combination with each 'First Name').
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="firstName"
+                 formControlName="firstName">
+          <small [hidden]="myForm.controls.firstName.valid || (myForm.controls.firstName.pristine && !submitted)">
+            First Name is required:
+            <ul>
+              <li>Unique in combination with each 'Companie's ID'</li>
+              <li>Min symbols = 2</li>
+              <li>Max symbols = 15</li>
+            </ul>
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="lastName"
+                 formControlName="lastName">
+          <small [hidden]="myForm.controls.lastName.valid || (myForm.controls.lastName.pristine && !submitted)">
+            Last Name is required:
+            <ul>
+              <li>Max symbols = 15</li>
+            </ul>
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 formControlName="email">
+          <small [hidden]="myForm.controls.email.valid || (myForm.controls.email.pristine && !submitted)">
+            User's e-mail is required:
+            <ul>
+              <li>Can not be dublicated</li>
+            </ul>
+          </small>
+        </div>
+
+        <div class="radio" *ngFor="let g of genders">
+          <label>
+            <input type="radio"
+                   formControlName="gender"
+                   [value]="g">
+            {{g}}
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="role">Select a user role (select one):</label>
+          <select class="form-control" id="role" formControlName="role">
+            <option>None</option>
+            <option *ngFor="let r of roles">{{r}}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid" (click)="onSubmit()">Add User</button>
+
+      </div>
+    </form>
+  </div>
+
+  <div class="col-sm-4 col-md-4">
+    <br>
+    <div class="alert alert-success" role="alert">
+      <h5 class="alert-heading">User Form Observable</h5>
+      <div *ngFor="let event of events">
+        <pre> {{ event | json }} </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
